@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "691808553771",
+    "project_id": "smart-ambulance-c384f",
+    "storage_bucket": "smart-ambulance-c384f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:691808553771:android:c31102230ff25fedb5d36e",
+        "android_client_info": {
+          "package_name": "com.flutterfairy.smart_ambulance"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "691808553771-cd4mvliak8b8ca6i329mogai6hvv1jvd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDynrK15WxZBJgEwtpNdZ92e5dFedPXz44"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "691808553771-cd4mvliak8b8ca6i329mogai6hvv1jvd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
