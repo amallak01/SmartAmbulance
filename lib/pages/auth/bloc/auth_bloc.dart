@@ -1,3 +1,5 @@
+// ignore_for_file: override_on_non_overriding_member, avoid_print
+
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
@@ -13,5 +15,34 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   @override
   Stream<AuthState> mapEventToState(AuthEvent event) async* {
+    if (event is PhoneNumberVerificationEvent) {
+      yield* _phoneAuthVerificationToState(event);
+    } else if (event is PhoneAuthCodeVerifiedEvent) {
+      final uid = await AuthService.instance?.verifyAndLogin(event.verificationId, event.smsCode, event.phone);
+      yield LoggedInState(uid!);
+    } else if (event is CodeSentEvent) {
+      yield CodeSentState(event.verificationId, event.token);
+    }
   }
+
+  
+  Stream<AuthState> _phoneAuthVerificationToState(PhoneNumberVerificationEvent event) async* {
+    yield LoadingAuthState();
+    await AuthService.instance?.verifyPhoneSendOtp(event.phone, completed: (credential) {
+      print('completed');
+      add(CompletedAuthEvent(credential));
+    }, failed: (error) {
+      print ('error');
+      add (ErrorOccuredEvent(error.toString()));
+    }, codeSent: (String id, int? token) {
+      print('code sent $id');
+
+    }, codeAutoRetrievalTimeout: (id) {
+      print('timeout $id');
+      add(CodeSentEvent(id, 0));
+    });
+  }
+
+
+
 }

@@ -54,12 +54,4 @@ class AuthService {
     return authCredential.user!.uid;
   }
 
-  Future<bool?> logOut() async {
-    await _auth.signOut();
-    UserRepository.instance.userNotifier.value = null;
-    // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
-    UserRepository.instance.userNotifier.notifyListeners();
-
-    return true;
-  }
 }
